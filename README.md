@@ -1,59 +1,67 @@
-# Facial-Emotion-Recognition-using-OpenCV-and-Deepface
-This project implements real-time facial emotion detection using the `deepface` library and OpenCV. It captures video from the webcam, detects faces, and predicts the emotions associated with each face. The emotion labels are displayed on the frames in real-time.
-This is probably the shortest code to implement realtime emotion monitoring.
-- Give this repository a ⭐ if you liked it, since it took me time to understand and implement this
-- Made with ❤️ by [Manish Tiwari](https://github.com/manish-9245)
+# Facial Emotion Recognition using OpenCV and DeepFace
+
+This repository contains a project that implements real-time facial emotion detection using OpenCV and the DeepFace library. The system captures video through a webcam, detects faces in real-time, and identifies emotions displayed by individuals in the video feed. The detected emotions are labeled and displayed on the video frames.
+
+If you find this project useful, please consider giving it a ⭐. Your support is appreciated!
 
 ## Dependencies
 
-- [deepface](https://github.com/serengil/deepface): A deep learning facial analysis library that provides pre-trained models for facial emotion detection. It relies on TensorFlow for the underlying deep learning operations.
-- [OpenCV](https://opencv.org/): An open-source computer vision library used for image and video processing.
+- **[DeepFace](https://github.com/serengil/deepface)**: A deep learning library for facial attribute analysis (e.g., emotion, age, gender, race) built on TensorFlow.
+- **[OpenCV](https://opencv.org/)**: An open-source computer vision and machine learning software library.
+
+## Setup and Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/UsmanGhias/FacialExpressionRecognition.git
+   cd FacialExpressionRecognition
+   ```
+
+2. **Install the required Python packages:**
+   - Install all dependencies at once:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - Or, install them individually:
+     ```bash
+     pip install deepface opencv-python
+     ```
+
+3. **Download the Haar Cascade Classifier for face detection:**
+   - Download `haarcascade_frontalface_default.xml` from the [OpenCV GitHub repository](https://github.com/opencv/opencv/tree/master/data/haarcascades).
 
 ## Usage
-### Initial steps:
-- Git clone this repository Run: `git clone https://github.com/manish-9245/Facial-Emotion-Recognition-using-OpenCV-and-Deepface.git`
-- Run: `cd Facial-Emotion-Recognition-using-OpenCV-and-Deepface`
-1. Install the required dependencies:
-   - You can use `pip install -r requirements.txt`
-   - Or you can install dependencies individually:
-      - `pip install deepface`
-      - `pip install tf_keras`
-      - `pip install opencv-python`
 
-2. Download the Haar cascade XML file for face detection:
-   - Visit the [OpenCV GitHub repository](https://github.com/opencv/opencv/tree/master/data/haarcascades) and download the `haarcascade_frontalface_default.xml` file.
+1. **Run the script:**
+   ```bash
+   python emotion_recognition.py
+   ```
+   This will start the webcam and begin the facial emotion recognition process. Detected emotions will be displayed on the video frames.
 
-3. Run the code:
-   - Execute the Python script.
-   - The webcam will open, and real-time facial emotion detection will start.
-   - Emotion labels will be displayed on the frames around detected faces.
+## How It Works
 
-## Approach
+1. **Video Capture:**
+   - Initialize video capture using OpenCV to access the webcam.
 
-1. Import the necessary libraries: `cv2` for video capture and image processing, and `deepface` for the emotion detection model.
+2. **Face Detection:**
+   - Convert captured video frames to grayscale to facilitate face detection.
+   - Use the Haar Cascade Classifier to detect faces within the frames.
 
-2. Load the Haar cascade classifier XML file for face detection using `cv2.CascadeClassifier()`.
+3. **Emotion Detection:**
+   - For each detected face, extract the Region of Interest (ROI).
+   - Analyze the ROI using the DeepFace library to predict the emotion.
 
-3. Start capturing video from the default webcam using `cv2.VideoCapture()`.
+4. **Display Results:**
+   - For each detected face, draw a rectangle around the face and label it with the predicted emotion.
+   - Show the annotated video frame in real-time.
 
-4. Enter a continuous loop to process each frame of the captured video.
+5. **Exit:**
+   - Press 'q' to quit the application.
 
-5. Convert each frame to grayscale using `cv2.cvtColor()`.
+6. **Clean up:**
+   - Release the webcam and close all OpenCV windows to free up resources.
 
-6. Detect faces in the grayscale frame using `face_cascade.detectMultiScale()`.
+## Author
 
-7. For each detected face, extract the face ROI (Region of Interest).
+**Usman Ghias** - Feel free to connect with me on [GitHub](https://github.com/UsmanGhias).
 
-8. Preprocess the face image for emotion detection using the `deepface` library's built-in preprocessing function.
-
-9. Make predictions for the emotions using the pre-trained emotion detection model provided by the `deepface` library.
-
-10. Retrieve the index of the predicted emotion and map it to the corresponding emotion label.
-
-11. Draw a rectangle around the detected face and label it with the predicted emotion using `cv2.rectangle()` and `cv2.putText()`.
-
-12. Display the resulting frame with the labeled emotion using `cv2.imshow()`.
-
-13. If the 'q' key is pressed, exit the loop.
-
-14. Release the video capture and close all windows using `cap.release()` and `cv2.destroyAllWindows()`.
